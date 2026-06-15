@@ -1,26 +1,263 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html.dark {
+  color-scheme: dark;
+  --paper: #080808;
+  --ink: #d2d2ce;
+  --line: #34342f;
+  --muted: #8f8f88;
+  --accent: #a6a6a0;
+  --selection-bg: rgba(72, 60, 90, 0.45);
+  --focus-ring: rgba(72, 60, 90, 0.4);
+  --focus-glow: rgba(58, 88, 98, 0.1);
+  --iris-name-gradient: linear-gradient(
+    105deg,
+    #9a9a96 0%,
+    #8e8898 14%,
+    #849498 28%,
+    #8a9890 42%,
+    #98908a 56%,
+    #908898 70%,
+    #9a9a96 100%
+  );
+  --iris-link-hover-shadow: -0.5px 0 rgba(90, 72, 108, 0.45), 0.5px 0 rgba(58, 98, 108, 0.4);
+  --ambient-1: radial-gradient(
+    ellipse 75% 55% at 6% 10%,
+    rgba(45, 38, 62, 0.35) 0%,
+    transparent 58%
+  );
+  --ambient-2: radial-gradient(
+    ellipse 60% 45% at 94% 12%,
+    rgba(38, 52, 62, 0.28) 0%,
+    transparent 52%
+  );
+  --ambient-3: radial-gradient(
+    ellipse 55% 50% at 82% 90%,
+    rgba(32, 52, 48, 0.22) 0%,
+    transparent 55%
+  );
+  --ambient-4: radial-gradient(
+    ellipse 50% 40% at 12% 85%,
+    rgba(52, 36, 46, 0.18) 0%,
+    transparent 50%
+  );
+  --conic-ambient: conic-gradient(
+    from 200deg at 50% 50%,
+    #2a2438 0deg,
+    #1e2e32 72deg,
+    #243028 144deg,
+    #322428 216deg,
+    #282838 288deg,
+    #2a2438 360deg
+  );
+  --color-paper: #080808;
+  --color-ink: #d2d2ce;
+  --color-line: #34342f;
+  --color-muted: #8f8f88;
+  --color-accent: #a6a6a0;
+}
+
+html.light {
+  color-scheme: light;
+  --paper: #f4f3ee;
+  --ink: #1c1c1a;
+  --line: #cbc9bf;
+  --muted: #6c6c64;
+  --accent: #4f4f4a;
+  --selection-bg: rgba(120, 100, 150, 0.22);
+  --focus-ring: rgba(100, 85, 130, 0.35);
+  --focus-glow: rgba(80, 120, 140, 0.12);
+  --iris-name-gradient: linear-gradient(
+    105deg,
+    #3a3a38 0%,
+    #5a4e68 16%,
+    #4a6270 32%,
+    #4a685e 48%,
+    #685a5e 64%,
+    #5a5268 80%,
+    #3a3a38 100%
+  );
+  --iris-link-hover-shadow: -0.5px 0 rgba(100, 80, 130, 0.35), 0.5px 0 rgba(60, 110, 130, 0.3);
+  --ambient-1: radial-gradient(
+    ellipse 75% 55% at 6% 10%,
+    rgba(180, 160, 210, 0.22) 0%,
+    transparent 58%
+  );
+  --ambient-2: radial-gradient(
+    ellipse 60% 45% at 94% 12%,
+    rgba(140, 180, 210, 0.18) 0%,
+    transparent 52%
+  );
+  --ambient-3: radial-gradient(
+    ellipse 55% 50% at 82% 90%,
+    rgba(120, 200, 170, 0.14) 0%,
+    transparent 55%
+  );
+  --ambient-4: radial-gradient(
+    ellipse 50% 40% at 12% 85%,
+    rgba(210, 150, 180, 0.12) 0%,
+    transparent 50%
+  );
+  --conic-ambient: conic-gradient(
+    from 200deg at 50% 50%,
+    #e8e0f4 0deg,
+    #dce8ee 72deg,
+    #e0eee8 144deg,
+    #f0e0e8 216deg,
+    #e8e8f4 288deg,
+    #e8e0f4 360deg
+  );
+  --color-paper: #f4f3ee;
+  --color-ink: #1c1c1a;
+  --color-line: #cbc9bf;
+  --color-muted: #6c6c64;
+  --color-accent: #4f4f4a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+
+  --text-display: clamp(2.5rem, 7vw, 4.75rem);
+  --text-display--line-height: 0.95;
+  --text-lede: clamp(0.95rem, 0.6rem + 0.9vw, 1.1875rem);
+  --text-lede--line-height: 1.65;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.7;
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.6;
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.4;
+  --text-micro: 0.625rem;
+  --text-micro--line-height: 1.4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes iris-drift {
+  0% {
+    opacity: 0.4;
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translate(1%, -0.5%) rotate(1deg);
+  }
+  100% {
+    opacity: 0.45;
+    transform: translate(-0.5%, 1%) rotate(-0.5deg);
   }
 }
 
+@keyframes iris-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--paper);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: var(--ambient-1), var(--ambient-2), var(--ambient-3), var(--ambient-4);
+  animation: iris-drift 32s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.035;
+  background: var(--conic-ambient);
+  animation: iris-drift 48s linear infinite;
+}
+
+html.light body::after {
+  opacity: 0.06;
+}
+
+.text-iris-name {
+  background: var(--iris-name-gradient);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: iris-shift 20s ease infinite;
+}
+
+.iris-link {
+  color: var(--accent);
+  transition:
+    color 0.5s ease,
+    text-shadow 0.5s ease;
+}
+
+.iris-link:hover {
+  color: var(--ink);
+  text-shadow: var(--iris-link-hover-shadow);
+  background: none;
+  animation: none;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 1px var(--focus-ring),
+    0 0 10px var(--focus-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body::before,
+  body::after {
+    animation: none;
+  }
+
+  .text-iris-name {
+    animation: none;
+    background-position: 50% 50%;
+  }
+
+  body {
+    transition: none;
+  }
 }

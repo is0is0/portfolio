@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Justin Nelson — Portfolio
 
-## Getting Started
+A minimal, single-page portfolio. Monochrome palette with a single "iris" gradient
+accent, animated ambient background, light/dark themes, and a project detail modal.
 
-First, run the development server:
+## Stack
+
+- [Next.js 16](https://nextjs.org) (App Router) + React 19
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion for entrance and hover animation
+- `next/og` for the generated favicon and Open Graph image
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # production build
+npm run start   # serve the production build
+npm run lint    # eslint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Repository structure
 
-## Learn More
+```
+portfolio/
+├── public/projects/          # Site media (served as static files)
+│   ├── finder/
+│   ├── integral/
+│   ├── soral/
+│   ├── voxel/
+│   └── other-works/
+│       ├── illustration/
+│       ├── logos-graphics/
+│       ├── motion-design/
+│       ├── pages/
+│       └── photomanipulation/
+├── src/
+│   ├── app/                    # Next.js App Router (layout, page, OG icons)
+│   ├── components/             # UI components
+│   └── lib/                    # Content data (projects, timeline, about, social)
+├── .env.example                # Copy to .env.local for local config
+└── Images/                     # Local source masters (gitignored, not deployed)
+```
 
-To learn more about Next.js, take a look at the following resources:
+**Media workflow:** Keep original exports in `Images/` locally. Add optimized
+web copies to `public/projects/<slug>/` and reference them in `src/lib/projects.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` to `.env.local` and set your production URL:
 
-## Deploy on Vercel
+```bash
+cp .env.example .env.local
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `NEXT_PUBLIC_SITE_URL` — canonical site URL for metadata and OG/Twitter tags.
+  Falls back to `VERCEL_URL` on Vercel, then `localhost` in development.
+- `src/lib/social.ts` — email and social links in the contact block and JSON-LD.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Editing content
+
+All page content lives in `src/lib/*`. Add or edit projects in `projects.ts`
+(images go in `public/projects/<slug>/`), update the timeline in `timeline.ts`,
+and the about/awards/fun-facts copy in `about.ts`.
+
+## Deploy
+
+### GitHub
+
+```bash
+git add .
+git commit -m "Portfolio site"
+git remote add origin https://github.com/<user>/<repo>.git
+git push -u origin main
+```
+
+### Vercel
+
+1. Import the GitHub repo at [vercel.com/new](https://vercel.com/new)
+2. Framework preset: **Next.js** (auto-detected)
+3. Add `NEXT_PUBLIC_SITE_URL` in project settings once you have a custom domain
+4. Deploy — `public/projects/` assets are served from the CDN automatically
+
+**Note:** Total media is ~190 MB. Vercel Hobby has a 100 MB upload limit; Pro
+supports up to 1 GB. Compress videos or upgrade if the deploy fails on size.
