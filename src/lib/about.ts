@@ -36,10 +36,9 @@ export const awards: string[] = [
 ];
 
 export const funFacts: string[] = [
-  "I used to play academy soccer nationally.",
+  "I used to play academy soccer.",
   "I reached the top 1% of players across several game titles on leaderboards.",
   "I started making content at 7, which led to owning gaming organizations during COVID and eventually freelance creativity in the online community across video editing, motion design, design, and photography.",
   "I used to work in my parents' Jamaican restaurant during COVID as a kid.",
   "I make, produce, and record my own music for fun.",
-  "I love fashion. I've been collecting archival pieces since 2022 and plan to open a showroom.",
 ];
